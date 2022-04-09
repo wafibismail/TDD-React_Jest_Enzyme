@@ -3,11 +3,15 @@
 *///import { render } from '@testing-library/react';
 import App from './App';
 import { shallow } from 'enzyme';
-
+import PersonList from './PersonList';
 
 describe('App', () => {
-  it("", () => {
-		// shallow: DON't remder the whole tree; Only render the app component
-    const appWrapper = shallow(<App />)
+  it("renders without crashing", () => {
+    const appWrapper = shallow(<App />);
+  });
+
+  it('', () => {
+    const appWrapper = shallow(<App />);
+    appWrapper.find(PersonList);
   });
 });

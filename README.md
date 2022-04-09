@@ -22,7 +22,7 @@ In my case, I picked [**TDD Live Coding - Test Driven Development Tutorial with 
 
 - Write a failing test 
 
-- Must not write more test than is sufficient to compile
+- Must not write more test than is sufficient to fail
 
 - Must not write more production code than sufficient to make the test pass
 
@@ -73,7 +73,18 @@ npm i -D enzyme
  - Start by creating a suite
    - Use describe("Thing to describe")
 
-```javascript
+```JavaScript
+//App.js
+function App() {
+  return (
+    <div className="App">
+    </div>
+  );
+}
+```
+
+```JavaScript
+//App.test.js
 describe('App', () => {
   it("Name of the component to test", () => {
     
@@ -90,10 +101,10 @@ describe('App', () => {
       - So we can inspect it
     - This is akin to creating an instance of a class
 
-```javascript
+```JavaScript
 describe('App', () => {
   it("", () => {
-    const appWrapper = shallow(<App />)
+    const appWrapper = shallow(<App />);
   });
 });
 ```
@@ -109,6 +120,63 @@ describe('App', () => {
 npm i -D enzyme-adapter-react-16
 ```
 
-First red-green cycle
-- All while doing these steps (getting enzyme to work), the test would fail as the environment was not already set up to be usable.
-- After finally configuring enzyme to work with jest (refer to src/setupTests.js), the first red-green cycle has been completed!
+- First red-green cycle
+  - All while doing these steps (getting enzyme to work), the test would fail as the environment was not already set up to be usable.
+  - After finally configuring enzyme to work with jest (refer to src/setupTests.js), the first red-green cycle has been completed!
+  - Anything to refactor? - the description for it()!
+
+```JavaScript
+describe('App', () => {
+  it("renders without crashing", () => {
+    const appWrapper = shallow(<App />);
+  });
+});
+```
+
+- Test is able to re-run without failing
+  - (We should always run our test on changes)
+
+Now for the next test
+- meaning, going back to the red phase
+  - The test below fails since there is no "PersonList" (i.e. not defined)
+
+
+```JavaScript
+describe('App', () => {
+  it("renders without crashing", () => {
+    const appWrapper = shallow(<App />);
+  });
+
+  it('', () => {
+    const appWrapper = shallow(<App />);
+    appWrapper.find(PersonList);
+  });
+});
+```
+
+- That is enough for the red phase
+  - remember, the law "Must not write more test than is sufficient to fail"
+
+- Now for the green phase
+  - "Must not write more production code than sufficient to make the test pass"
+
+```JavaScript
+//Newly created Person.js in src folder
+export default () => {};
+```
+
+```JavaScript
+//Current App.jsimport PersonList from './PersonList';
+function App() {
+  return (
+    <div className="App">
+      <PersonList />
+    </div>
+  );
+}
+```
+
+```JavaScript
+//New import statement on top of App.test.js
+import PersonList from './PersonList';
+```
