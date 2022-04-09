@@ -108,3 +108,7 @@ describe('App', () => {
 ```
 npm i -D enzyme-adapter-react-16
 ```
+
+First red-green cycle
+- All while doing these steps (getting enzyme to work), the test would fail as the environment was not already set up to be usable.
+- After finally configuring enzyme to work with jest (refer to src/setupTests.js), the first red-green cycle has been completed!
