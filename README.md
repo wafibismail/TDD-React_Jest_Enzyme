@@ -55,6 +55,10 @@ Another exercise assigled by my Software Engineering lecturer, now on Test-Drive
 - Special library (gives a different interface) for working with react components
 - Install manually
 
+```
+npm i -D enzyme
+```
+
 ### Points - (not arranged properly, currently top-to-down = start-to-end
 
 - Start in the red phase
@@ -75,7 +79,26 @@ describe('App', () => {
   - Because we haven't created an assertion to fail
 
 - Note that labeling can come later e.g. part of refactor phase
-  - In the mean time, can create an **app wrapper**
+  - In the mean time, can create an **app wrapper** (see code block below)
     - containing the results of going and getting the app component
       - So we can inspect it
     - This is akin to creating an instance of a class
+
+```javascript
+describe('App', () => {
+  it("", () => {
+    const appWrapper = shallow(<App />)
+  });
+});
+```
+
+- **shallow** from enzyme
+  - Forces to not load the entire child tree/branches of the component
+    - Only loads the app
+  - The enzyme-adapter-react-16 package is required
+    - Since it's 2 versions lower than the installed react version, I downgraded react from 18->16
+
+
+```
+npm i -D enzyme-adapter-react-16
+```
