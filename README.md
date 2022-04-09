@@ -77,4 +77,5 @@ describe('App', () => {
 - Note that labeling can come later e.g. part of refactor phase
   - In the mean time, can create an **app wrapper**
     - containing the results of going and getting the app component
-
+      - So we can inspect it
+    - This is akin to creating an instance of a class
