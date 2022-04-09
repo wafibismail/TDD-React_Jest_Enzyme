@@ -2,7 +2,9 @@
 
 ## About
 
-Another exercise assigled by my Software Engineering lecturer, now on Test-Driven Development (TDD)
+Another exercise assigned by my Software Engineering lecturer, now on Test-Driven Development (TDD). <br>
+<br>
+We were recommended few YouTube videos to base our exercises from. In my case, I picked [TDD Live Coding - Test Driven Development Tutorial with React, Jest, and Enzyme](https://www.youtube.com/watch?v=tX-gu6FWcsE) by Programming Made EZ
 
 ### Steps (cycle - do these over and over again)
 
