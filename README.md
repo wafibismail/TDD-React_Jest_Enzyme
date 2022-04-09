@@ -97,7 +97,7 @@ describe('App', () => {
 - **shallow** from enzyme
   - Forces to not load the entire child tree/branches of the component
     - Only loads the app
-  - The enzyme-adapter-react-16 package is required
+  - The enzyme-adapter-react-16 package is required (no higher version available)
     - Since it's 2 versions lower than the installed react version, I downgraded react from 18->16
 
 
