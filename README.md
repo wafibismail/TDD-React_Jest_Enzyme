@@ -67,11 +67,12 @@ npm i -D enzyme
 
 ### Points - (not arranged properly, currently top-to-down = start-to-end
 
-- Start in the red phase
+Start in the red phase<br>
+<br>
 
-- Remember: Write a test that fails
- - Start by creating a suite
-   - Use describe("Thing to describe")
+Remember: Write a test that fails
+- Start by creating a suite
+  - Use describe("Thing to describe")
 
 ```JavaScript
 //App.js
@@ -92,14 +93,14 @@ describe('App', () => {
 });
 ```
 
-- The test above passes
-  - Because we haven't created an assertion to fail
+The test above passes
+- Because we haven't created an assertion to fail
 
-- Note that labeling can come later e.g. part of refactor phase
-  - In the mean time, can create an **app wrapper** (see code block below)
-    - containing the results of going and getting the app component
-      - So we can inspect it
-    - This is akin to creating an instance of a class
+Note that labeling can come later e.g. part of refactor phase
+- In the mean time, can create an **app wrapper** (see code block below)
+  - containing the results of going and getting the app component
+    - So we can inspect it
+  - This is akin to creating an instance of a class
 
 ```JavaScript
 describe('App', () => {
@@ -109,21 +110,21 @@ describe('App', () => {
 });
 ```
 
-- **shallow** from enzyme
-  - Forces to not load the entire child tree/branches of the component
-    - Only loads the app
-  - The enzyme-adapter-react-16 package is required (no higher version available)
-    - Since it's 2 versions lower than the installed react version, I downgraded react from 18->16
+**shallow** from enzyme
+- Forces to not load the entire child tree/branches of the component
+  - Only loads the app
+- The enzyme-adapter-react-16 package is required (no higher version available)
+  - Since it's 2 versions lower than the installed react version, I downgraded react from 18->16
 
 
 ```
 npm i -D enzyme-adapter-react-16
 ```
 
-- First red-green cycle
-  - All while doing these steps (getting enzyme to work), the test would fail as the environment was not already set up to be usable.
-  - After finally configuring enzyme to work with jest (refer to src/setupTests.js), the first red-green cycle has been completed!
-  - Anything to refactor? - the description for it()!
+First red-green cycle
+- All while doing these steps (getting enzyme to work), the test would fail as the environment was not already set up to be usable.
+- After finally configuring enzyme to work with jest (refer to src/setupTests.js), the first red-green cycle has been completed!
+- Anything to refactor? - the description for it()!
 
 ```JavaScript
 describe('App', () => {
@@ -133,8 +134,8 @@ describe('App', () => {
 });
 ```
 
-- Test is able to re-run without failing
-  - (We should always run our test on changes)
+Test is able to re-run without failing
+- (We should always run our test on changes)
 
 Now for the next test
 - meaning, going back to the red phase
@@ -154,11 +155,11 @@ describe('App', () => {
 });
 ```
 
-- That is enough for the red phase
-  - remember, the law "Must not write more test than is sufficient to fail"
+That is enough for the red phase
+- remember, the law "Must not write more test than is sufficient to fail"
 
-- Now for the green phase
-  - "Must not write more production code than sufficient to make the test pass"
+Now for the green phase
+- "Must not write more production code than sufficient to make the test pass"
 
 ```JavaScript
 //Newly created Person.js in src folder
@@ -179,4 +180,36 @@ function App() {
 ```JavaScript
 //New import statement on top of App.test.js
 import PersonList from './PersonList';
+```
+
+- Note that the test is not done yet, actually.
+  - Still need to create an assertion
+
+```JavaScript
+describe('App', () => {
+  it("renders without crashing", () => {
+    const appWrapper = shallow(<App />);
+  });
+
+  it('renders a person list', () => {
+    const appWrapper = shallow(<App />);
+    const personList = appWrapper.find(PersonList);
+
+    //Checks that there is only one element in the array personList;
+    expect(personList).toHaveLength(1);
+  });
+});
+```
+
+Done! Also included in the code above is:
+- the refactor phase i.e. describe the test
+
+On to the next implementation
+- Again, starting with a test
+
+```JavaScript
+//another test, under the same test suite
+it('', () => {
+  
+});
 ```

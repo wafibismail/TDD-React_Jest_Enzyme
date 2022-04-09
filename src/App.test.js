@@ -10,8 +10,11 @@ describe('App', () => {
     const appWrapper = shallow(<App />);
   });
 
-  it('', () => {
+  it('renders a person list', () => {
     const appWrapper = shallow(<App />);
-    appWrapper.find(PersonList);
+    const personList = appWrapper.find(PersonList);
+
+    //Checks that there is only one element in the array personList;
+    expect(personList).toHaveLength(1);
   });
 });
