@@ -21,5 +21,7 @@ describe('App', () => {
   it('', () => {
     const appWrapper = shallow(<App />);
     const appState = appWrapper.state();
+  
+    expect(appState).not.toBeNull();
   });
 });

@@ -241,3 +241,31 @@ class App extends Component {
 
 export default App;
 ```
+
+Going back to (*n*)ZOMBIEs... What if the state is null?
+- We do not want null; Having a null should fail the test
+
+```JavaScript
+//App.test.js
+it('', () => {
+  const appWrapper = shallow(<App />);
+  const appState = appWrapper.state();
+
+  expect(appState).not.toBeNull();
+});
+```
+
+It indeed does fail, to make it pass, create a state and set to an empty object
+
+```JavaScript
+class App extends Component {
+  state = {}
+  render() {
+    return (
+      <div className="App">
+      <PersonList />
+      </div>
+    );
+  }
+}
+```
