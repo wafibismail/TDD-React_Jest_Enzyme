@@ -389,8 +389,8 @@ it('', () => {
   const personList = appWrapper.find(PersonList);
     
   expect(personList.props().people).toEqual(appWrapper.state().people);
-  // where props is the function that gets the people prop
-  // and which is equal to the peole on state
+  // where props is the function that gets properties of personList, and in this case we use it to get plople
+  // and which should be equal to the people on state
 });
 ```
 
