@@ -379,4 +379,42 @@ describe('App', () => {
 Next?<bs>
 <br>
 
-We need to move the people property to PersonList for for the PersonList to be able to render whatever it needs to.
+We need to move the people property to PersonList for for the PersonList to be able to render whatever it needs to.<br>
+<br>
+
+We could write the code to assign people as a property. However, a test needs to be written around that too.
+
+```JavaScript
+it('', () => {
+  const personList = appWrapper.find(PersonList);
+    
+  expect(personList.props().people).toEqual(appWrapper.state().people);
+  // where props is the function that gets the people prop
+  // and which is equal to the peole on state
+});
+```
+
+The test fails; To make it pass:
+
+```JavaScript
+class App extends Component {
+  state = { people: [] };
+  render() {
+    return (
+      <div className="App">
+        <PersonList people={this.state.people} />
+      </div>
+    );
+  }
+}
+```
+
+Refactor:
+
+```JavaScript
+it('passes people property of state to personList as prop', () => {
+  const personList = appWrapper.find(PersonList);
+  
+  expect(personList.props().people).toEqual(appWrapper.state().people);
+});
+```
