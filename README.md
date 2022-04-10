@@ -269,3 +269,114 @@ class App extends Component {
   }
 }
 ```
+
+Now that the test passes, is there any refactoring?
+- Yes! Describe the test
+
+```JavaScript
+//App.test.js
+it('has state', () => {
+  const appWrapper = shallow(<App />);
+  const appState = appWrapper.state();
+
+  expect(appState).not.toBeNull();
+});
+```
+
+And now, again, back to the red phase with a new test:
+
+```JavaScript
+it('', () => {
+   
+});
+```
+
+We want the PersonList to contain people, so the corresponding test:
+
+```Javascript
+it('', () => {
+  const appWrapper = shallow(<App />);
+  const appState = appWrapper.state();
+
+  expect(appState.people).toBeDefined();
+});
+```
+
+Adding people (empty array) to the state passes the test:
+
+```JavaScript
+state = { people: [] };
+```
+
+And that passes the test. <br>
+<br>
+
+Now for the refactor phase, what can we clean up?
+
+```JavaScript
+describe('App', () => {
+  it("renders without crashing", () => {
+    const appWrapper = shallow(<App />);
+  });
+
+  it('renders a person list', () => {
+    const appWrapper = shallow(<App />);
+    const personList = appWrapper.find(PersonList);
+
+    expect(personList).toHaveLength(1);
+  });
+
+  it('has state', () => {
+    const appWrapper = shallow(<App />);
+    const appState = appWrapper.state();
+  
+    expect(appState).not.toBeNull();
+  });
+
+  it('', () => {
+    const appWrapper = shallow(<App />);
+    const appState = appWrapper.state();
+  
+    expect(appState.people).toBeDefined();
+  });
+});
+```
+
+The answer?
+- The redundant first line of each test
+  - which can be extracted into a beforeAll state
+
+- In addition giving the most recent test a description
+
+```JavaScript
+describe('App', () => {
+  let appWrapper;
+  beforeAll(() => {
+    appWrapper = shallow(<App />);
+  });
+
+  it('renders a person list', () => {
+    const personList = appWrapper.find(PersonList);
+
+    //Checks that there is only one element in the array personList;
+    expect(personList).toHaveLength(1);
+  });
+
+  it('has state', () => {
+    const appState = appWrapper.state();
+  
+    expect(appState).not.toBeNull();
+  });
+
+  it('has a people property on state', () => {
+    const appState = appWrapper.state();
+  
+    expect(appState.people).toBeDefined();
+  });
+});
+```
+
+Next?<bs>
+<br>
+
+We need to move the people property to PersonList for for the PersonList to be able to render whatever it needs to.

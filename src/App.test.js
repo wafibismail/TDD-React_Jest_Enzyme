@@ -6,22 +6,27 @@ import { shallow } from 'enzyme';
 import PersonList from './PersonList';
 
 describe('App', () => {
-  it("renders without crashing", () => {
-    const appWrapper = shallow(<App />);
+  let appWrapper;
+  beforeAll(() => {
+    appWrapper = shallow(<App />);
   });
 
   it('renders a person list', () => {
-    const appWrapper = shallow(<App />);
     const personList = appWrapper.find(PersonList);
 
     //Checks that there is only one element in the array personList;
     expect(personList).toHaveLength(1);
   });
 
-  it('', () => {
-    const appWrapper = shallow(<App />);
+  it('has state', () => {
     const appState = appWrapper.state();
   
     expect(appState).not.toBeNull();
+  });
+
+  it('has a people property on state', () => {
+    const appState = appWrapper.state();
+  
+    expect(appState.people).toBeDefined();
   });
 });
