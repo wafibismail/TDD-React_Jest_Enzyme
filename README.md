@@ -201,15 +201,43 @@ describe('App', () => {
 });
 ```
 
-Done! Also included in the code above is:
+Done! Test should pass (there be only one PersonList). Also included in the code above is:
 - the refactor phase i.e. describe the test
 
 On to the next implementation
-- Again, starting with a test
+- Again, starting with a test (red phase)
 
 ```JavaScript
 //another test, under the same test suite
 it('', () => {
   
 });
+```
+
+Say we want App to contain an object for PersonList. In which case the App component has to have something called state property.
+
+```JavaScript
+//App.test.js
+it('', () => {
+  const appWrapper = shallow(<App />);
+  const appState = appWrapper.state();
+});
+```
+
+```JavaScript
+//App.js, now with App converted to a class
+import React, { Component } from 'react';
+import PersonList from './PersonList';
+
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+      <PersonList />
+      </div>
+    );
+  }
+}
+
+export default App;
 ```

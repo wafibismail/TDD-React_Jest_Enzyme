@@ -17,4 +17,9 @@ describe('App', () => {
     //Checks that there is only one element in the array personList;
     expect(personList).toHaveLength(1);
   });
+
+  it('', () => {
+    const appWrapper = shallow(<App />);
+    const appState = appWrapper.state();
+  });
 });

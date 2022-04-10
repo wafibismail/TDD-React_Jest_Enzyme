@@ -1,11 +1,14 @@
+import React, { Component } from 'react';
 import PersonList from './PersonList';
 
-function App() {
-  return (
-    <div className="App">
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
       <PersonList />
-    </div>
-  );
+      </div>
+    );
+  }
 }
 
 export default App;
